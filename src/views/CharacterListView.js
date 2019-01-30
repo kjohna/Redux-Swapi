@@ -34,7 +34,7 @@ class CharacterListView extends React.Component {
       <div className="CharactersList_wrapper">
         {this.props.fetching && (
           // <div> Loading... </div>
-          <Loader type="Ball-Triangle" color="#00BFFF" height="90" width="60" />
+          <Loader type="Oval" color="#edea5e" height="90" width="60" />
         )}
         {this.props.error ? 
         <h1>Error: {this.props.error.message}</h1>
