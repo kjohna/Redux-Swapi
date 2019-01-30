@@ -17,15 +17,29 @@ class CharacterListView extends React.Component {
   }
 
   render() {
-    if (this.props.fetching) {
-      // return something here to indicate that you are fetching data
-      return (
-        <Loader type="Ball-Triangle" color="#00BFFF" height="90" width="60" />
-      );
-    }
+    // if (this.props.fetching) {
+    //   // return something here to indicate that you are fetching data
+    //   console.log("loading...", console.log(this.props.fetching));
+    //   return (
+    //     <div>
+    //       <p>Loading...</p>
+    //       {/* <Loader type="Ball-Triangle" color="#00BFFF" height="90" width="60" /> */}
+    //     </div>
+    //   );
+    // }
+    console.log("fetching: ", this.props.fetching);
+    console.log("characters length: ", this.props.characters.length)
+    // debugger;
     return (
       <div className="CharactersList_wrapper">
-        <CharacterList characters={this.props.characters} />
+        {this.props.fetching && (
+          // <div> Loading... </div>
+          <Loader type="Ball-Triangle" color="#00BFFF" height="90" width="60" />
+        )}
+        {this.props.error ? 
+        <h1>Error: {this.props.error.message}</h1>
+        : <CharacterList characters={this.props.characters} />
+        }
       </div>
     );
   }
@@ -36,7 +50,8 @@ class CharacterListView extends React.Component {
 const mapStateToProps = (state) => {
   return {
     characters: state.charsReducer.characters,
-    fetching: state.charsReducer.fetching
+    fetching: state.charsReducer.fetching,
+    error: state.charsReducer.error
   }
 }
 
